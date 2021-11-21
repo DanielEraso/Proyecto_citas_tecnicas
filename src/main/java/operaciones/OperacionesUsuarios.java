@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperacionesUsuarios implements Operacion<Usuario>{
+public class OperacionesUsuarios implements Operacion<Usuario>, IOperacionesUsuarios{
     private static Logger log = LogManager.getLogger(OperacionesUsuarios.class.getName());
 
     private final String sqlCrear= "INSERT INTO Usuario(id, nombre, apellido, telefono, correo, nombreUsuario, esAdmin, contraseña) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -79,6 +79,7 @@ public class OperacionesUsuarios implements Operacion<Usuario>{
     public List<Usuario> consultar() {
         return null;
     }
+
     @Override
     public Usuario consultarPorUsuario(String nombreUsuario) {
         ManejadorConexion mc = new ManejadorConexion();

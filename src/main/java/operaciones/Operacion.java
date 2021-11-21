@@ -10,6 +10,6 @@ public interface Operacion<T> {
     public boolean borrar(T dato);
     public T consulta(String pk);
     public List<T> consultar();
-    public Usuario consultarPorUsuario(String nombreUsuario);
+
 
 }

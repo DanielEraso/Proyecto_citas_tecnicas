@@ -29,37 +29,38 @@
     <h:form style="margin-top: 60px">
 <!--    <h:panelGrid columns="2">-->
 <!--    <p:panel id="panel" header="INICIAR SESION ADMINISTRADOR" style="background-color: #3ab7ff ;text-align: center; margin-left: 220px;">-->
+        <center>
+        <p:panel id="panel" style="width: 550px;">
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Nombre:" style=""/>
+                <p:inputText id="txtNombre" value="#{agendarVisitaTecnicaBean.visitaTecnica.nombreCliente}" required="true" label="Nombre"/>
+                <p:outputLabel value="Cedula:" />
+                <p:inputNumber id="txtCedula" value="#{agendarVisitaTecnicaBean.visitaTecnica.cedula}" decimalPlaces="0" required="true" label="Cedula"/>
+                <p:outputLabel value="Dirección:" />
+                <p:inputText id="txtDirección" value="#{agendarVisitaTecnicaBean.visitaTecnica.direccion}" required="true" label="Dirección"/>
+                <p:outputLabel value="Telefono:" />
+                <p:inputNumber id="txtTelefono" value="#{agendarVisitaTecnicaBean.visitaTecnica.telefono}" decimalPlaces="0" required="true" label="Teléfono"/>
 
-        <h:panelGrid columns="2" style="alignment: center">
-            <p:outputLabel value="Nombre:" style=""/>
-            <p:inputText id="txtNombre" />
-            <p:outputLabel value="Cedula:" />
-            <p:inputText id="txtCedula"/>
-            <p:outputLabel value="Dirección:" />
-            <p:inputText id="txtDirección"/>
-            <p:outputLabel value="Telefono:" />
-            <p:inputText id="txtTelefono"/>
+            </h:panelGrid>
 
-
-        </h:panelGrid>
-
-        <p:outputLabel value="Hora:" />
-        <h:panelGrid columns="2" style="alignment: center">
-            <p:outputLabel value="Desde las:" />
-            <p:datePicker id="DesdeLas"  timeOnly="true" pattern="HH:mm"/>
-            <p:outputLabel value="Hasta las:" />
-            <p:datePicker id="HastaLas"  timeOnly="true" pattern="HH:mm"/>
-        </h:panelGrid>
-        <h:panelGrid columns="1" style="alignment: center">
-            <p:outputLabel value="Descripcion del problema:" />
-            <p:inputTextarea rows="10" cols="50" queryDelay="750" minQueryLength="4">
-            </p:inputTextarea>
-        </h:panelGrid>
-        <p:commandButton id="ValidarVisita" value="Agendar visita"/>
-        <p:messages id="messages" showDetail="true" closable="true">
-            <p:autoUpdate />
-        </p:messages>
-<!--    </p:panel>-->
+            <p:outputLabel value="Hora:" />
+            <h:panelGrid columns="2">
+                <p:outputLabel value="Desde las:" />
+                <p:datePicker id="DesdeLas" showTime="true" value="#{agendarVisitaTecnicaBean.visitaTecnica.horaInicio}" required="true" label="Desde las"/>
+                <p:outputLabel value="Hasta las:" />
+                <p:datePicker id="HastaLas" showTime="true" value="#{agendarVisitaTecnicaBean.visitaTecnica.horaFin}" required="true" label="Hasta las"/>
+            </h:panelGrid>
+            <h:panelGrid columns="1">
+                <p:outputLabel value="Descripcion del problema:" />
+                <p:inputTextarea rows="10" cols="50" queryDelay="750" minQueryLength="4" value="#{agendarVisitaTecnicaBean.visitaTecnica.descripcion}" required="true" label="Descipción">
+                </p:inputTextarea>
+            </h:panelGrid>
+            <p:commandButton id="ValidarVisita" value="Agendar visita"  update="panel" action="#{agendarVisitaTecnicaBean.agendarVisitaTecnica()}"/>
+            <p:messages id="messages" showDetail="true" closable="true">
+                <p:autoUpdate />
+            </p:messages>
+        </p:panel>
+        </center>
 <!--    </h:panelGrid>-->
     </h:form>
 </h:body>

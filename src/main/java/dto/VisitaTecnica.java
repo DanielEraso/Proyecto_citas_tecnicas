@@ -4,11 +4,12 @@ import java.util.Date;
 
 public class VisitaTecnica implements Serializable {
     private long id;
-    private String nombreUsuario;
+    private String nombreCliente;
+    private String cedula;
     private String direccion;
-    private long telefono;
-    private Date fecha;
-    private Date hora;
+    private String telefono;
+    private Date horaInicio;
+    private Date horaFin;
     private String descripcion;
 
     public long getId() {
@@ -19,12 +20,20 @@ public class VisitaTecnica implements Serializable {
         this.id = id;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
+    public String getNombreCliente() {
+        return nombreCliente;
     }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getDireccion() {
@@ -35,28 +44,28 @@ public class VisitaTecnica implements Serializable {
         this.direccion = direccion;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setHoraInicio(Date horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    public Date getHora() {
-        return hora;
+    public Date getHoraFin() {
+        return horaFin;
     }
 
-    public void setHora(Date hora) {
-        this.hora = hora;
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
     }
 
     public String getDescripcion() {
@@ -71,11 +80,12 @@ public class VisitaTecnica implements Serializable {
     public String toString() {
         return "VisitaTecnica{" +
                 "id=" + id +
-                ", nombreUsuario='" + nombreUsuario + '\'' +
+                ", nombreCliente='" + nombreCliente + '\'' +
+                ", cedula='" + cedula + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", telefono=" + telefono +
-                ", fecha=" + fecha +
-                ", hora=" + hora +
+                ", horaInicio='" + horaInicio + '\'' +
+                ", horaFin='" + horaFin + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }

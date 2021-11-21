@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Aplicacion visitas técnicas </title>
+</h:head>
+
+<h:body style="margin-left:50px">
+    <p:breadCrumb>
+        <p:menuitem value="Home" url="index.xhtml" />
+        <p:menuitem value="Informacion" url="index.xhtml" />
+        <p:menuitem value="Servicios" url="index.xhtml" />
+        <p:menuitem value="Contactos" url="index.xhtml" />
+        <p:menuitem value="Iniciar sesion" url="#" />
+    </p:breadCrumb>
+
+    <center>
+        <p style="font-size: 50px; color: #3ab7ff ;">Aplicacion visitas técnicas</p>
+        <img src="Imagenes/apoyo-tecnico.png" alt=""/>
+    </center>
+
+    <h:form style="margin-top: 60px">
+        <h:panelGrid columns="2">
+            <p:panel id="panel" header="INICIAR SESION ADMINISTRADOR" style="background-color: #3ab7ff ;text-align: center; margin-left: 220px;">
+                <p:graphicImage value="Imagenes/Administrador.png"/>
+                <h:panelGrid columns="2" style="alignment: center">
+                    <p:outputLabel value="Usuario:" style=""/>
+                    <p:inputText id="txtUsuario" value="#{inicioSesionBean.nombreUsuario}"/>
+                    <p:outputLabel value="Contraseña:" />
+                    <p:password id="txtContraseña" value="#{inicioSesionBean.contraseña}"/>
+
+                </h:panelGrid>
+                <p:commandButton id="ValidarUsuario" value="Ingresar" action="#{inicioSesionBean.ingresarAdmin()}"/>
+                <p:messages id="messages" showDetail="true" closable="true">
+                    <p:autoUpdate />
+                </p:messages>
+            </p:panel>
+            <p:panel id="panel2" header="INICIAR SESION TÉCNICO" style="background-color: #3ab7ff;text-align: center; margin-left: 80px">
+                <p:graphicImage value="Imagenes/Tecnico.png"/>
+                <h:panelGrid columns="2" style="alignment: center">
+                    <p:outputLabel value="Usuario:" style=""/>
+                    <p:inputText id="txtUsuario2"/>
+                    <p:outputLabel value="Contraseña:" />
+                    <p:password id="txtContraseña2"/>
+
+                </h:panelGrid>
+                <p:commandButton id="ValidarUsuario2" value="Ingresar"/>
+            </p:panel>
+        </h:panelGrid>
+        <p:panel id="Asistente" header="Asistente"  style="margin-bottom:20px">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage value="Imagenes/Asistente.jpg" style="width: 220px;height: 220px" />
+                <h:outputText
+                        value="Si tiene problemas de inicio de sesion comuniquese a la Ext ### o al Telefono ####" />
+            </h:panelGrid>
+        </p:panel>
+    </h:form>
+
+
+</h:body>
+</html>

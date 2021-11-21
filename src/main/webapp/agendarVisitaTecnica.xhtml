@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Aplicacion visitas técnicas </title>
+</h:head>
+<h:body style="margin-left:50px">
+    <p:menubar>
+        <p:submenu label="Visitas">
+            <p:menuitem value="Agendar visita" url="#" />
+            <p:menuitem value="Lista de visita" url="#" />
+        </p:submenu>
+
+        <p:menuitem value="Cerrar sesion" url="iniciarSesion.xhtml" style="margin-left: 65pc" />
+
+    </p:menubar>
+
+    <center>
+        <p style="font-size: 50px; color: #3ab7ff ;">Agendar visitas técnicas</p>
+        <img src="Imagenes/apoyo-tecnico.png" alt=""/>
+    </center>
+
+    <h:form style="margin-top: 60px">
+<!--    <h:panelGrid columns="2">-->
+<!--    <p:panel id="panel" header="INICIAR SESION ADMINISTRADOR" style="background-color: #3ab7ff ;text-align: center; margin-left: 220px;">-->
+
+        <h:panelGrid columns="2" style="alignment: center">
+            <p:outputLabel value="Nombre:" style=""/>
+            <p:inputText id="txtNombre" />
+            <p:outputLabel value="Cedula:" />
+            <p:inputText id="txtCedula"/>
+            <p:outputLabel value="Dirección:" />
+            <p:inputText id="txtDirección"/>
+            <p:outputLabel value="Telefono:" />
+            <p:inputText id="txtTelefono"/>
+
+
+        </h:panelGrid>
+
+        <p:outputLabel value="Hora:" />
+        <h:panelGrid columns="2" style="alignment: center">
+            <p:outputLabel value="Desde las:" />
+            <p:datePicker id="DesdeLas"  timeOnly="true" pattern="HH:mm"/>
+            <p:outputLabel value="Hasta las:" />
+            <p:datePicker id="HastaLas"  timeOnly="true" pattern="HH:mm"/>
+        </h:panelGrid>
+        <h:panelGrid columns="1" style="alignment: center">
+            <p:outputLabel value="Descripcion del problema:" />
+            <p:inputTextarea rows="10" cols="50" queryDelay="750" minQueryLength="4">
+            </p:inputTextarea>
+        </h:panelGrid>
+        <p:commandButton id="ValidarVisita" value="Agendar visita"/>
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate />
+        </p:messages>
+<!--    </p:panel>-->
+<!--    </h:panelGrid>-->
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Aplicacion visitas técnicas </title>
+</h:head>
+
+<h:body style="margin-left:50px">
+    <p:breadCrumb>
+        <p:menuitem value="Home" url="index.xhtml" />
+        <p:menuitem value="Informacion" url="#menu" />
+        <p:menuitem value="Servicios" url="#menu" />
+        <p:menuitem value="Contactos" url="#menu" />
+        <p:menuitem value="Iniciar sesion" url="iniciarSesion.xhtml" />
+    </p:breadCrumb>
+    <center>
+        <p style="font-size: 50px; color: #3ab7ff ;">Aplicacion visitas técnicas</p>
+        <img src="Imagenes/apoyo-tecnico.png" alt=""/>
+    </center>
+
+    <center>
+        <p:imageSwitch effect="zoom" style="background-color: black">
+            <ui:repeat value="#{indexBean.images}" var="image">
+                <p:graphicImage value="/Imagenes/visitas/#{image}" style="width: 1000px;height: 200px" />
+            </ui:repeat>
+        </p:imageSwitch>
+    </center>
+
+
+    <p style="font-size: 25px;text-align: center">Bienvenidos a la aplicacion de visitas tecnicas donde tus problemas se resuelven en un abrir y cerrar de ojos.</p>
+    <p style="font-size: 25px;text-align: center">Señor usuario inicie sesion para agendar o atender una visita técnica.</p>
+    <p/>
+
+    <p:panel id="Asistente" header="Asistente"  style="margin-bottom:20px">
+        <h:panelGrid columns="2" cellpadding="10">
+            <p:graphicImage value="Imagenes/Asistente.jpg" style="width: 220px;height: 220px" />
+            <h:outputText
+                    value="Bienvenido a la aplicacion de serivicios de visitas tecnicas. Si necesita saber mas sobre nosotos dele click en Informacion, si quiere saber que servicios prestamos dele click en Servicios, si quiere contactarnos dele click en Contactos, si eres un usuario de la empresa inicia sesion para empezar a trabajar " />
+        </h:panelGrid>
+    </p:panel>
+
+    <h3 style="margin-top:0"></h3>
+    <div id = "menu">
+    <p:accordionPanel>
+        <p:tab title="Informacion">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                <h:outputText
+                        value="Somos una empresa que brinda soluciones tecnicas a nuestros usuarios con eficacia y rapidez en la comodidad de su casa." />
+            </h:panelGrid>
+        </p:tab>
+
+        <p:tab title="Servicios">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="demo/images/godfather/godfather2.jpg" />
+                <h:outputText value="Brindamos servicios tecnicos de television, telefonia e internet." />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Contactos">
+            <h:panelGrid columns="2" cellpadding="10">
+                <p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+                <h:outputText value="Puede contactarnos a los numeros 018000######## o al cel ############" />
+            </h:panelGrid>
+        </p:tab>
+    </p:accordionPanel>
+    </div>
+
+
+
+</h:body>
+</html>

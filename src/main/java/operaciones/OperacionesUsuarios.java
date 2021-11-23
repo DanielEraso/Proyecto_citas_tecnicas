@@ -2,6 +2,7 @@ package operaciones;
 
 import bd.ManejadorConexion;
 import dto.Usuario;
+import dto.VisitaTecnica;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,8 @@ public class OperacionesUsuarios implements Operacion<Usuario>, IOperacionesUsua
     private final String sqlConsultaPorNombreUsuario= "select * from \"Usuario\" WHERE \"nombreUsuario\" =?";
 //    private final String sqlModificar= "UPDATE vehiculo SET precio = ?, marca =? WHERE placa = ?";
 //    private final String sqlConsultaPK= "select * from vehiculo  WHERE placa = ?";
-//    private final String sqlConsultaALL= "select * from vehiculo  ";
+    private final String sqlConsultaALL= "select * from \"Usuario\"  ";
+    private final String sqlConsultaTecnicos= "select * from \"Usuario\" where \"esAdmin\" = false ";
 //    private final String sqlBorrar= "delete from vehiculo  WHERE placa = ?";
     @Override
     public boolean crear(Usuario dato) {
@@ -77,7 +80,36 @@ public class OperacionesUsuarios implements Operacion<Usuario>, IOperacionesUsua
 
     @Override
     public List<Usuario> consultar() {
-        return null;
+        ManejadorConexion mc = new ManejadorConexion();
+        Connection conexActiva = mc.conectarsepostgres();
+        if (conexActiva != null){
+            try {
+                PreparedStatement ps = conexActiva.prepareStatement(sqlConsultaALL);
+
+                ResultSet resultado = ps.executeQuery();
+                List<Usuario> datos = new ArrayList<>();
+                while (resultado.next()){
+                    Usuario usuario = new Usuario();
+                    usuario.setId(resultado.getLong("id"));
+                    usuario.setNombre(resultado.getString("nombre"));
+                    usuario.setApellido(resultado.getString("apellido"));
+                    usuario.setTelefono(resultado.getInt("telefono"));
+                    usuario.setCorreo(resultado.getString("correo"));
+                    usuario.setNombreUsuario(resultado.getString("nombreUsuario"));
+                    usuario.setEsAdmin(resultado.getBoolean("esAdmin"));
+                    usuario.setContraseña(resultado.getString("contraseña"));
+                    datos.add(usuario);
+                }
+                return datos;
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                mc.desconexion(conexActiva);
+
+            }
+        }
+        return new ArrayList<>();
     }
 
     @Override
@@ -108,6 +140,40 @@ public class OperacionesUsuarios implements Operacion<Usuario>, IOperacionesUsua
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Usuario> consultarTecnicos() {
+        ManejadorConexion mc = new ManejadorConexion();
+        Connection conexActiva = mc.conectarsepostgres();
+        if (conexActiva != null){
+            try {
+                PreparedStatement ps = conexActiva.prepareStatement(sqlConsultaTecnicos);
+
+                ResultSet resultado = ps.executeQuery();
+                List<Usuario> datos = new ArrayList<>();
+                while (resultado.next()){
+                    Usuario usuario = new Usuario();
+                    usuario.setId(resultado.getLong("id"));
+                    usuario.setNombre(resultado.getString("nombre"));
+                    usuario.setApellido(resultado.getString("apellido"));
+                    usuario.setTelefono(resultado.getInt("telefono"));
+                    usuario.setCorreo(resultado.getString("correo"));
+                    usuario.setNombreUsuario(resultado.getString("nombreUsuario"));
+                    usuario.setEsAdmin(resultado.getBoolean("esAdmin"));
+                    usuario.setContraseña(resultado.getString("contraseña"));
+                    datos.add(usuario);
+                }
+                return datos;
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                mc.desconexion(conexActiva);
+
+            }
+        }
+        return new ArrayList<>();
     }
 
 }

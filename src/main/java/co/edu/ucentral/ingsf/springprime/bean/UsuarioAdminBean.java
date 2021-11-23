@@ -21,5 +21,7 @@ import javax.faces.bean.ViewScoped;
 @Setter
 @RequestScoped
 public class UsuarioAdminBean implements Serializable{
-
+    public String irAgendarVisitaTecnica() {
+        return "agendarVisitaTecnica";
+    }
 }

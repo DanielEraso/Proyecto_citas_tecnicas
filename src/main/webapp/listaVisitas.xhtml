@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Aplicacion visitas técnicas </title>
+    <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+</h:head>
+
+<h:body style="margin-left:50px">
+    <p:menubar>
+        <p:submenu label="Visitas">
+            <p:menuitem value="Agendar visita" url="agendarVisitaTecnica.xhtml" />
+            <p:menuitem value="Lista de visita" url="listaVisitas.xhtml" />
+        </p:submenu>
+
+        <p:menuitem value="Cerrar sesion" url="iniciarSesion.xhtml" style="margin-left: 65pc" />
+
+    </p:menubar>
+
+    <center>
+        <p style="font-size: 50px; color: #3ab7ff ;">Lista visitas técnicas</p>
+        <p:graphicImage value="Imagenes/Administrador.png"/>
+    </center>
+
+    <h:form style="margin-top: 60px">
+        <p:commandButton id="ValidarVisita" value="Refrescar" action="#{listaVisitasBean.init()}" update="visitasTable"/>
+
+
+        <p:dataTable id="visitasTable" var="visita" value="#{listaVisitasBean.visitasTecnicas}">
+            <p:column headerText="Id">
+                <h:outputText value="#{visita.id}" />
+            </p:column>
+
+            <p:column headerText="Nombre">
+                <h:outputText value="#{visita.nombreCliente}" />
+            </p:column>
+
+            <p:column headerText="Teléfono">
+                <h:outputText value="#{visita.telefono}" />
+            </p:column>
+
+            <p:column headerText="Fecha">
+                <h:outputText value="#{visita.horaInicio}" />
+            </p:column>
+
+            <p:column headerText="Opciones">
+                <center>
+                    <p:commandButton icon="pi pi-user" style="margin-right:20px;" title="Icon Only" action="#{listaVisitasBean.mostrarTecnicos()}">
+                        <f:setPropertyActionListener value="#{visita}" target="#{listaVisitasBean.visitaTecnicaSeleccionada}" />
+                    </p:commandButton>
+                </center>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+</h:body>
+</html>

@@ -14,8 +14,7 @@
 <h:body style="margin-left:50px">
     <p:menubar>
         <p:submenu label="Visitas">
-            <p:menuitem value="Agendar visita" url="agendarVisitaTecnica.xhtml" />
-            <p:menuitem value="Lista de visita" url="listaVisitas.xhtml" />
+            <p:menuitem value="Buscar visita" url="#"/>
         </p:submenu>
 
         <p:menuitem value="Cerrar sesion" url="iniciarSesion.xhtml" style="margin-left: 65pc" />
@@ -24,14 +23,14 @@
 
     <center>
         <p style="font-size: 50px; color: #3ab7ff ;">Aplicacion visitas técnicas</p>
-        <p:graphicImage value="Imagenes/Administrador.png"/>
+        <p:graphicImage value="Imagenes/Tecnico.png"/>
     </center>
 
     <p:panel id="Asistente" header="Asistente"  style="margin-bottom:20px">
         <h:panelGrid columns="2" cellpadding="10">
             <p:graphicImage value="Imagenes/Asistente.jpg" style="width: 220px;height: 220px" />
             <h:outputText
-                    value="Señor/@ usuario en esta ventana usted podra dirigirse a la pestaña de visitas en el cual va a poder agendar una visita técnica o ver la lista de las visitas que ya estan creadas." />
+                    value="Señor técnico, en la pestaña de Visitas usted podra buscar las visitas tecnicas creadas para ser atendidas." />
         </h:panelGrid>
     </p:panel>
 

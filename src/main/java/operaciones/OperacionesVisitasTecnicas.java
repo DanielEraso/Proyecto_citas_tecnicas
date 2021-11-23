@@ -6,10 +6,10 @@ import dto.VisitaTecnica;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OperacionesVisitasTecnicas implements Operacion<VisitaTecnica>{
@@ -19,8 +19,11 @@ public class OperacionesVisitasTecnicas implements Operacion<VisitaTecnica>{
     private final String sqlConsultaPorNombreUsuario= "select * from \"Usuario\" WHERE \"nombreUsuario\" =?";
     //    private final String sqlModificar= "UPDATE vehiculo SET precio = ?, marca =? WHERE placa = ?";
 //    private final String sqlConsultaPK= "select * from vehiculo  WHERE placa = ?";
-//    private final String sqlConsultaALL= "select * from vehiculo  ";
+    private final String sqlConsultaALL= "select * from \"VisitaTecnica\"";
 //    private final String sqlBorrar= "delete from vehiculo  WHERE placa = ?";
+
+    private SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
     @Override
     public boolean crear(VisitaTecnica dato) {
         if (dato == null){
@@ -38,8 +41,8 @@ public class OperacionesVisitasTecnicas implements Operacion<VisitaTecnica>{
                 ps.setString(2, dato.getCedula());
                 ps.setString(3, dato.getDireccion());
                 ps.setString(4, dato.getTelefono());
-                ps.setDate(5, new java.sql.Date(dato.getHoraInicio().getTime()));
-                ps.setDate(6, new java.sql.Date(dato.getHoraFin().getTime()));
+                ps.setString(5, formateador.format(dato.getHoraInicio()));
+                ps.setString(6, formateador.format(dato.getHoraFin()));
                 ps.setString(7, dato.getDescripcion());
 
 
@@ -75,7 +78,36 @@ public class OperacionesVisitasTecnicas implements Operacion<VisitaTecnica>{
 
     @Override
     public List<VisitaTecnica> consultar() {
-        return null;
+        ManejadorConexion mc = new ManejadorConexion();
+        Connection conexActiva = mc.conectarsepostgres();
+        if (conexActiva != null){
+            try {
+                PreparedStatement ps = conexActiva.prepareStatement(sqlConsultaALL);
+
+                ResultSet resultado = ps.executeQuery();
+                List<VisitaTecnica> datos = new ArrayList<>();
+                while (resultado.next()){
+                    VisitaTecnica visitaTecnica = new VisitaTecnica();
+                    visitaTecnica.setId(resultado.getLong("id"));
+                    visitaTecnica.setNombreCliente(resultado.getString("nombre_cliente"));
+                    visitaTecnica.setCedula(resultado.getString("cedula"));
+                    visitaTecnica.setDireccion(resultado.getString("direccion"));
+                    visitaTecnica.setTelefono(resultado.getString("telefono"));
+                    visitaTecnica.setHoraInicio(formateador.parse(resultado.getString("hora_inicio")));
+                    visitaTecnica.setHoraFin(formateador.parse(resultado.getString("hora_fin")));
+                    visitaTecnica.setDescripcion(resultado.getString("descripcion_problema"));
+                    datos.add(visitaTecnica);
+                }
+                return datos;
+
+            } catch (SQLException | ParseException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                mc.desconexion(conexActiva);
+
+            }
+        }
+        return new ArrayList<>();
     }
 
 }

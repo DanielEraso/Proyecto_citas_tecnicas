@@ -57,5 +57,35 @@ public class InicioSesionBean implements Serializable {
 
         return "usuarioAdmin";
     }
+    public String ingresarTecnico (){
+        OperacionesUsuarios operacionesUsuarios = new OperacionesUsuarios();
+        Usuario usuario = operacionesUsuarios.consultarPorUsuario(nombreUsuario);
+        if (nombreUsuario == null || nombreUsuario.isEmpty()){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrese usuario", ""));
+            return "";
+        }
+
+        if (contraseña == null || contraseña.isEmpty()){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ingrese contraseña", ""));
+            return "";
+        }
+        if (usuario == null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario no existe", ""));
+            return "";
+        }
+
+        if (!usuario.getContraseña().equals(contraseña)){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña no es valida", ""));
+            return "";
+        }
+
+        if (usuario.isEsAdmin()){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "El usuario no es tecnico", ""));
+            return "";
+        }
+
+        return "usuarioTecnico";
+
+    }
 
 }

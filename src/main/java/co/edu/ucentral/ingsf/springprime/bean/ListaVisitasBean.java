@@ -26,11 +26,12 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@ManagedBean
+@ManagedBean (name="listaVisitasBean")
 @ViewScoped
 @Getter
 @Setter
 @RequestScoped
+@SessionScoped
 public class ListaVisitasBean implements Serializable {
     private List<VisitaTecnica> visitasTecnicas;
 

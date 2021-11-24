@@ -25,8 +25,9 @@
         <img src="Imagenes/apoyo-tecnico.png" alt=""/>
     </center>
 
-    <h:form style="margin-top: 60px">
+<!--    <h:form style="margin-top: 60px">-->
         <h:panelGrid columns="2">
+            <h:form style="margin-top: 60px">
             <p:panel id="panel" header="INICIAR SESION ADMINISTRADOR" style="background-color: #3ab7ff ;text-align: center; margin-left: 220px;">
                 <p:graphicImage value="Imagenes/Administrador.png"/>
                 <h:panelGrid columns="2" style="alignment: center">
@@ -36,23 +37,33 @@
                     <p:password id="txtContraseña" value="#{inicioSesionBean.contraseña}"/>
 
                 </h:panelGrid>
-                <p:commandButton id="ValidarUsuario" value="Ingresar" action="#{inicioSesionBean.ingresarAdmin()}"/>
-                <p:messages id="messages" showDetail="true" closable="true">
-                    <p:autoUpdate />
-                </p:messages>
+                <p:commandButton id="ValidarAdmin" update="messages" value="Ingresar" action="#{inicioSesionBean.ingresarAdmin()}"/>
+<!--                <p:messages id="messagesAdmin" showDetail="true" closable="true">-->
+<!--                    <p:autoUpdate />-->
+<!--                </p:messages>-->
             </p:panel>
+            </h:form>
+            <h:form style="margin-top: 60px">
             <p:panel id="panel2" header="INICIAR SESION TÉCNICO" style="background-color: #3ab7ff;text-align: center; margin-left: 80px">
                 <p:graphicImage value="Imagenes/Tecnico.png"/>
                 <h:panelGrid columns="2" style="alignment: center">
                     <p:outputLabel value="Usuario:" style=""/>
-                    <p:inputText id="txtUsuario2"/>
+                    <p:inputText id="txtUsuario2" value="#{inicioSesionBean.nombreUsuario}"/>
                     <p:outputLabel value="Contraseña:" />
-                    <p:password id="txtContraseña2"/>
+                    <p:password id="txtContraseña2" value="#{inicioSesionBean.contraseña}"/>
 
                 </h:panelGrid>
-                <p:commandButton id="ValidarUsuario2" value="Ingresar"/>
+                <p:commandButton id="ValidarTecnico" update="messages" value="Ingresar" action="#{inicioSesionBean.ingresarTecnico()}"/>
+<!--                <p:messages id="messagesTecnico" showDetail="true" closable="true">-->
+<!--                    <p:autoUpdate />-->
+<!--                </p:messages>-->
             </p:panel>
+            </h:form>
         </h:panelGrid>
+        <p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate />
+        </p:messages>
+
         <p:panel id="Asistente" header="Asistente"  style="margin-bottom:20px">
             <h:panelGrid columns="2" cellpadding="10">
                 <p:graphicImage value="Imagenes/Asistente.jpg" style="width: 220px;height: 220px" />
@@ -60,7 +71,7 @@
                         value="Si tiene problemas de inicio de sesion comuniquese a la Ext ### o al Telefono ####" />
             </h:panelGrid>
         </p:panel>
-    </h:form>
+<!--    </h:form>-->
 
 
 </h:body>

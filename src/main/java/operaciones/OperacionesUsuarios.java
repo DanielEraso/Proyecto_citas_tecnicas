@@ -17,7 +17,7 @@ import java.util.List;
 public class OperacionesUsuarios implements Operacion<Usuario>, IOperacionesUsuarios{
     private static Logger log = LogManager.getLogger(OperacionesUsuarios.class.getName());
 
-    private final String sqlCrear= "INSERT INTO Usuario(id, nombre, apellido, telefono, correo, nombreUsuario, esAdmin, contraseña) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String sqlCrear= "INSERT INTO public.\"Usuario\"(id, nombre, apellido, telefono, correo, \"nombreUsuario\", \"esAdmin\", \"contraseña\")VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String sqlConsultaPorNombreUsuario= "select * from \"Usuario\" WHERE \"nombreUsuario\" =?";
 //    private final String sqlModificar= "UPDATE vehiculo SET precio = ?, marca =? WHERE placa = ?";
 //    private final String sqlConsultaPK= "select * from vehiculo  WHERE placa = ?";
@@ -28,12 +28,9 @@ public class OperacionesUsuarios implements Operacion<Usuario>, IOperacionesUsua
     public boolean crear(Usuario dato) {
         if (dato == null){
             return false;
-        }else if (dato.getId() == 0){
-            return false;
-
         }
         ManejadorConexion mc = new ManejadorConexion();
-        Connection conexActiva = mc.conectarse();
+        Connection conexActiva = mc.conectarsepostgres();
         if (conexActiva != null){
             try {
                 PreparedStatement ps = conexActiva.prepareStatement(sqlCrear);

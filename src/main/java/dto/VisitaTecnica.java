@@ -11,6 +11,7 @@ public class VisitaTecnica implements Serializable {
     private Date horaInicio;
     private Date horaFin;
     private String descripcion;
+    private Long tecnicoId;
 
     public long getId() {
         return id;
@@ -76,6 +77,14 @@ public class VisitaTecnica implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public Long getTecnicoId() {
+        return tecnicoId;
+    }
+
+    public void setTecnicoId(Long tecnicoId) {
+        this.tecnicoId = tecnicoId;
+    }
+
     @Override
     public String toString() {
         return "VisitaTecnica{" +
@@ -87,6 +96,7 @@ public class VisitaTecnica implements Serializable {
                 ", horaInicio='" + horaInicio + '\'' +
                 ", horaFin='" + horaFin + '\'' +
                 ", descripcion='" + descripcion + '\'' +
+                ", tecnicoId='" + tecnicoId + '\'' +
                 '}';
     }
 }

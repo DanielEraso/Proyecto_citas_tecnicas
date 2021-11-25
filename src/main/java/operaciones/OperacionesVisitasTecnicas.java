@@ -12,13 +12,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperacionesVisitasTecnicas implements Operacion<VisitaTecnica>{
+public class OperacionesVisitasTecnicas implements Operacion<VisitaTecnica>, IOperacionesVisitasTecnicas{
     private static Logger log = LogManager.getLogger(OperacionesUsuarios.class.getName());
 
     private final String sqlCrear= "INSERT INTO \"VisitaTecnica\"( nombre_Cliente, cedula, direccion, telefono, hora_inicio, hora_fin, descripcion_problema) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
     private final String sqlConsultaPorNombreUsuario= "select * from \"Usuario\" WHERE \"nombreUsuario\" =?";
     //    private final String sqlModificar= "UPDATE vehiculo SET precio = ?, marca =? WHERE placa = ?";
-//    private final String sqlConsultaPK= "select * from vehiculo  WHERE placa = ?";
+    private final String sqlModificarTecnicoId = "UPDATE \"VisitaTecnica\" SET tecnico_id=? WHERE id = ?";
+    //    private final String sqlConsultaPK= "select * from vehiculo  WHERE placa = ?";
     private final String sqlConsultaALL= "select * from \"VisitaTecnica\"";
 //    private final String sqlBorrar= "delete from vehiculo  WHERE placa = ?";
 
@@ -96,6 +97,7 @@ public class OperacionesVisitasTecnicas implements Operacion<VisitaTecnica>{
                     visitaTecnica.setHoraInicio(formateador.parse(resultado.getString("hora_inicio")));
                     visitaTecnica.setHoraFin(formateador.parse(resultado.getString("hora_fin")));
                     visitaTecnica.setDescripcion(resultado.getString("descripcion_problema"));
+                    visitaTecnica.setTecnicoId(resultado.getLong("tecnico_id"));
                     datos.add(visitaTecnica);
                 }
                 return datos;
@@ -110,4 +112,29 @@ public class OperacionesVisitasTecnicas implements Operacion<VisitaTecnica>{
         return new ArrayList<>();
     }
 
+    @Override
+    public boolean modificarTecnicoId(Long visitaTecnicaId, Long TecnicoId) {
+        ManejadorConexion mc = new ManejadorConexion();
+        Connection conexActiva = mc.conectarsepostgres();
+        if (conexActiva != null){
+            try {
+                PreparedStatement ps = conexActiva.prepareStatement(sqlModificarTecnicoId);
+
+                ps.setLong(1, TecnicoId);
+                ps.setLong(2, visitaTecnicaId);
+                int resultado = ps.executeUpdate();
+                if(resultado > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                mc.desconexion(conexActiva);
+            }
+        }
+        return false;
+    }
 }

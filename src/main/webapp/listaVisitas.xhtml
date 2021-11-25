@@ -51,13 +51,47 @@
 
             <p:column headerText="Opciones">
                 <center>
-                    <p:commandButton icon="pi pi-user" style="margin-right:20px;" title="Icon Only" action="#{listaVisitasBean.mostrarTecnicos()}">
+                    <p:commandButton icon="pi pi-user" style="margin-right:20px;" disabled="#{visita.tecnicoId > 0}" title="Icon Only" oncomplete="PF('tecnicosDialog').show()">
                         <f:setPropertyActionListener value="#{visita}" target="#{listaVisitasBean.visitaTecnicaSeleccionada}" />
                     </p:commandButton>
                 </center>
             </p:column>
         </p:dataTable>
     </h:form>
+
+    <p:dialog header="Asignar Técnico" widgetVar="tecnicosDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="carDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" columnClasses="label,value">
+                <h:form style="margin-top: 60px">
+                    <p:dataTable var="tecnico" value="#{listaVisitasBean.usuariosTecnicos}" rendered="#{listaVisitasBean.visitasTecnicas.size()>0}">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{tecnico.id}" />
+                        </p:column>
+
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{tecnico.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="Apellido">
+                            <h:outputText value="#{tecnico.apellido}" />
+                        </p:column>
+
+                        <p:column headerText="Teléfono">
+                            <h:outputText value="#{tecnico.telefono}" />
+                        </p:column>
+
+                        <p:column headerText="Opciones">
+                            <center>
+                                <p:commandButton icon="pi pi-check" style="margin-right:20px;" title="Icon Only" action="#{listaVisitasBean.asignarTecnico()}">
+                                    <f:setPropertyActionListener value="#{tecnico}" target="#{listaVisitasBean.tecnicoSeleccionado}" />
+                                </p:commandButton>
+                            </center>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
 
 </h:body>
 </html>

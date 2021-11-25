@@ -4,6 +4,7 @@ import dto.Usuario;
 import dto.VisitaTecnica;
 import lombok.Getter;
 import lombok.Setter;
+import operaciones.OperacionesUsuarios;
 import operaciones.OperacionesVisitasTecnicas;
 import org.primefaces.PrimeFaces;
 import org.springframework.stereotype.Component;
@@ -26,30 +27,34 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@ManagedBean (name="listaVisitasBean")
+@ManagedBean
 @ViewScoped
 @Getter
 @Setter
 @RequestScoped
-@SessionScoped
 public class ListaVisitasBean implements Serializable {
     private List<VisitaTecnica> visitasTecnicas;
 
+    private List<Usuario> usuariosTecnicos;
+
     private VisitaTecnica visitaTecnicaSeleccionada;
+    private Usuario tecnicoSeleccionado;
+
+    private OperacionesVisitasTecnicas operacionesVisitasTecnicas;
+    private OperacionesUsuarios operacionesUsuarios;
 
     @PostConstruct
-    public void init() throws IOException {
-        OperacionesVisitasTecnicas operacionesVisitasTecnicas = new OperacionesVisitasTecnicas();
-
+    public void init() {
+        operacionesVisitasTecnicas = new OperacionesVisitasTecnicas();
         visitasTecnicas = operacionesVisitasTecnicas.consultar();
+
+        operacionesUsuarios = new OperacionesUsuarios();
+        usuariosTecnicos = operacionesUsuarios.consultarTecnicos();
 
     }
 
-    public void mostrarTecnicos() {
-        System.out.println(visitaTecnicaSeleccionada);
-        Map<String,Object> options = new HashMap<>();
-        options.put("resizable", false);
-        PrimeFaces.current().dialog().openDynamic("asignarTecnico", options, null);
+    public void asignarTecnico() {
+        operacionesVisitasTecnicas.modificarTecnicoId(visitaTecnicaSeleccionada.getId(), tecnicoSeleccionado.getId());
     }
 
 }

@@ -37,14 +37,14 @@ class SpringprimeApplicationTests {
     public void testPruebaCrearUsuario(){
         OperacionesUsuarios oper = new OperacionesUsuarios();
         Usuario u = new Usuario();
-        u.setId(7);
-        u.setNombre("Carlos");
-        u.setApellido("Estrada");
+        u.setId(8);
+        u.setNombre("Manuel");
+        u.setApellido("Castro");
         u.setTelefono(3133545);
-        u.setCorreo("cestrada@ucentral.edu.co");
-        u.setNombreUsuario("cestrada");
-        u.setEsAdmin(true);
-        u.setContraseña("Carlos1");
+        u.setCorreo("mcastro@ucentral.edu.co");
+        u.setNombreUsuario("mcastro");
+        u.setEsAdmin(false);
+        u.setContraseña("Manuel1");
         boolean rta= oper.crear(u);
         System.out.println(u);
         assertTrue(rta);
